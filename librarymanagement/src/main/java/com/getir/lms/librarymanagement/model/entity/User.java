@@ -1,5 +1,6 @@
-package com.getir.lms.librarymanagement.user;
+package com.getir.lms.librarymanagement.model.entity;
 
+import com.getir.lms.librarymanagement.model.enums.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
