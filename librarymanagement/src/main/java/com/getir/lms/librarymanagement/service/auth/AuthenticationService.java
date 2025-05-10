@@ -1,10 +1,12 @@
 package com.getir.lms.librarymanagement.service.auth;
 
 import com.getir.lms.librarymanagement.dto.AuthenticationResponse;
+import com.getir.lms.librarymanagement.dto.UpdateRequest;
 import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
 import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
 import com.getir.lms.librarymanagement.dto.userinfo.UserInfoResponse;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.security.core.Authentication;
 
 
@@ -17,4 +19,9 @@ public interface AuthenticationService {
   UserInfoResponse getUserInfo(Authentication authentication);
 
   List<UserInfoResponse> getAllUsers();
+
+  UserInfoResponse update(UUID id, UpdateRequest request);
+
+
+  void delete(UUID id);
 }

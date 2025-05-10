@@ -30,7 +30,11 @@ public class WebSecurityConfig {
             .requestMatchers("/api/v1/auth/register/**").permitAll()
             .requestMatchers("/api/v1/auth/authenticate/**").permitAll()
             // private endpoints
-            .requestMatchers("/api/v1/auth/details/**").hasAuthority(Role.LIBRARIAN.name()).anyRequest()
+            .requestMatchers(HttpMethod.PUT, "/api/v1/auth/**").hasAuthority(Role.LIBRARIAN.name())
+            .requestMatchers(HttpMethod.DELETE, "/api/v1/auth/**").hasAuthority(Role.LIBRARIAN.name())
+            .requestMatchers("/api/v1/auth/details/**").hasAuthority(Role.LIBRARIAN.name())
+
+            .anyRequest()
             .authenticated())
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
