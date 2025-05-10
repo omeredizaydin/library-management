@@ -11,6 +11,8 @@ import com.getir.lms.librarymanagement.model.enums.Role;
 import com.getir.lms.librarymanagement.model.entity.User;
 import com.getir.lms.librarymanagement.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,7 +38,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         .lastName(request.getLastName())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
-        .role(Role.PATRON)
+        .role(request.getRole())
         .build();
     userRepository.save(user);
 
@@ -63,5 +65,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     User user = userRepository.findByEmail(authentication.getName())
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     return AuthenticationAssembler.toResponse(user);
+  }
+
+  @Override
+  public List<UserInfoResponse> getAllUsers() {
+    List<User> allPatronUsers = userRepository.findAllByRole(Role.PATRON);
+    return AuthenticationAssembler.toResponse(allPatronUsers);
   }
 }
