@@ -1,11 +1,8 @@
 package com.getir.lms.librarymanagement.model.transform;
 
-import com.getir.lms.librarymanagement.dto.userinfo.UserInfoResponse;
+import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
 import com.getir.lms.librarymanagement.model.entity.User;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class AuthenticationAssembler {
   public static UserInfoResponse toResponse(User user) {

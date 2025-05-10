@@ -1,7 +1,7 @@
 package com.getir.lms.librarymanagement.common.controller;
 
 import com.getir.lms.librarymanagement.common.error.ErrorResponse;
-import com.getir.lms.librarymanagement.common.error.UserNotFoundException;
+import com.getir.lms.librarymanagement.common.exception.UserNotFoundException;
 import com.getir.lms.librarymanagement.common.error.ValidationErrorResponse;
 import java.util.List;
 import org.springframework.context.support.DefaultMessageSourceResolvable;

@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.dto.userinfo;
+package com.getir.lms.librarymanagement.dto.info;
 
 import com.getir.lms.librarymanagement.model.enums.Role;
 import java.util.UUID;
