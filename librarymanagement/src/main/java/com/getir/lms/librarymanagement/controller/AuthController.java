@@ -1,10 +1,10 @@
-package com.getir.lms.librarymanagement.auth;
+package com.getir.lms.librarymanagement.controller;
 
 import com.getir.lms.librarymanagement.dto.AuthenticationResponse;
 import com.getir.lms.librarymanagement.dto.UpdateRequest;
 import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
 import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
-import com.getir.lms.librarymanagement.dto.userinfo.UserInfoResponse;
+import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
 import com.getir.lms.librarymanagement.service.auth.AuthenticationService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -40,8 +40,8 @@ public class AuthController {
   }
 
   @GetMapping("/me")
-  public ResponseEntity<UserInfoResponse> getUserInfo(Authentication authentication) {
-    return ResponseEntity.ok(service.getUserInfo(authentication));
+  public ResponseEntity<UserInfoResponse> getUserInfo() {
+    return ResponseEntity.ok(service.getUserInfo());
   }
 
   @GetMapping("/details")

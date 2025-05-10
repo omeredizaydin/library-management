@@ -1,12 +1,12 @@
 package com.getir.lms.librarymanagement.service.auth.impl;
 
-import com.getir.lms.librarymanagement.common.error.UserNotFoundException;
+import com.getir.lms.librarymanagement.common.exception.UserNotFoundException;
 import com.getir.lms.librarymanagement.config.JwtService;
 import com.getir.lms.librarymanagement.dto.AuthenticationResponse;
 import com.getir.lms.librarymanagement.dto.UpdateRequest;
 import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
 import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
-import com.getir.lms.librarymanagement.dto.userinfo.UserInfoResponse;
+import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
 import com.getir.lms.librarymanagement.model.entity.User;
 import com.getir.lms.librarymanagement.model.enums.Role;
 import com.getir.lms.librarymanagement.model.transform.AuthenticationAssembler;
@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -69,13 +70,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @Override
-  public UserInfoResponse getUserInfo(Authentication authentication) {
+  public UserInfoResponse getUserInfo() {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
     log.debug(
         "AuthenticationServiceImpl::getUserInfo user information with email: {} has been fetching.",
-        authentication.getName());
-    User user = userRepository.findByEmail(authentication.getName())
-        .orElseThrow(() -> new UserNotFoundException(
-            String.format("User not found with email: %s", authentication.getName())));
+        email);
+
+    User user = userRepository.findByEmail(email).orElseThrow(
+        () -> new UserNotFoundException(String.format("User not found with email: %s", email)));
     return AuthenticationAssembler.toResponse(user);
   }
 

@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.common.error;
+package com.getir.lms.librarymanagement.common.exception;
 
 import lombok.Getter;
 
