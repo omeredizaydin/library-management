@@ -5,6 +5,7 @@ import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
 import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
 import com.getir.lms.librarymanagement.dto.userinfo.UserInfoResponse;
 import com.getir.lms.librarymanagement.service.auth.AuthenticationService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -34,5 +35,10 @@ public class AuthController {
   @GetMapping("/me")
   public ResponseEntity<UserInfoResponse> getUserInfo(Authentication authentication) {
     return ResponseEntity.ok(service.getUserInfo(authentication));
+  }
+
+  @GetMapping("/details")
+  public ResponseEntity<List<UserInfoResponse>> getAllUsers() {
+    return ResponseEntity.ok(service.getAllUsers());
   }
 }

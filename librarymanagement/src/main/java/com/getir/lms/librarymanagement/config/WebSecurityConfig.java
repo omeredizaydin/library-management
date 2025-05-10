@@ -1,8 +1,10 @@
 package com.getir.lms.librarymanagement.config;
 
+import com.getir.lms.librarymanagement.model.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,9 +27,10 @@ public class WebSecurityConfig {
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth
             // public endpoints
-            .requestMatchers("/api/v1/auth/**").permitAll()
+            .requestMatchers("/api/v1/auth/register/**").permitAll()
+            .requestMatchers("/api/v1/auth/authenticate/**").permitAll()
             // private endpoints
-            .anyRequest()
+            .requestMatchers("/api/v1/auth/details/**").hasAuthority(Role.LIBRARIAN.name()).anyRequest()
             .authenticated())
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

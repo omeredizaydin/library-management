@@ -4,6 +4,7 @@ import com.getir.lms.librarymanagement.dto.AuthenticationResponse;
 import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
 import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
 import com.getir.lms.librarymanagement.dto.userinfo.UserInfoResponse;
+import java.util.List;
 import org.springframework.security.core.Authentication;
 
 
@@ -14,4 +15,6 @@ public interface AuthenticationService {
 
 
   UserInfoResponse getUserInfo(Authentication authentication);
+
+  List<UserInfoResponse> getAllUsers();
 }
