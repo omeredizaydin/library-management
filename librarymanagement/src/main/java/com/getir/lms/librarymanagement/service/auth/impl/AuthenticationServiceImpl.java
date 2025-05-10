@@ -1,5 +1,6 @@
 package com.getir.lms.librarymanagement.service.auth.impl;
 
+import com.getir.lms.librarymanagement.common.error.UserNotFoundException;
 import com.getir.lms.librarymanagement.config.JwtService;
 import com.getir.lms.librarymanagement.dto.AuthenticationResponse;
 import com.getir.lms.librarymanagement.dto.UpdateRequest;
@@ -19,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +60,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
     var user = userRepository.findByEmail(request.getEmail())
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        .orElseThrow(() -> new UserNotFoundException(
+            String.format("User not found with email: %s", request.getEmail())));
     var jwtToken = jwtService.generateToken(user);
     return AuthenticationResponse.builder()
         .token(jwtToken)
@@ -73,7 +74,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         "AuthenticationServiceImpl::getUserInfo user information with email: {} has been fetching.",
         authentication.getName());
     User user = userRepository.findByEmail(authentication.getName())
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        .orElseThrow(() -> new UserNotFoundException(
+            String.format("User not found with email: %s", authentication.getName())));
     return AuthenticationAssembler.toResponse(user);
   }
 
@@ -87,7 +89,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   @Override
   public UserInfoResponse update(UUID id, UpdateRequest request) {
     User user = userRepository.findById(id)
-        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        .orElseThrow(() -> new UserNotFoundException(
+            String.format("User not found with id: %s", id)));
 
     log.debug("AuthenticationServiceImpl::update user with id {} has been fetched.", user.getId());
     user.setFirstName(request.getFirstName());

@@ -6,6 +6,7 @@ import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
 import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
 import com.getir.lms.librarymanagement.dto.userinfo.UserInfoResponse;
 import com.getir.lms.librarymanagement.service.auth.AuthenticationService;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -27,13 +28,14 @@ public class AuthController {
   private final AuthenticationService service;
 
   @PostMapping("/register")
-  public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
+  public ResponseEntity<AuthenticationResponse> register(
+      @Valid @RequestBody RegisterRequest request) {
     return ResponseEntity.ok(service.register(request));
   }
 
   @PostMapping("/authenticate")
-  public ResponseEntity<AuthenticationResponse> register(
-      @RequestBody AuthenticationRequest request) {
+  public ResponseEntity<AuthenticationResponse> login(
+      @Valid @RequestBody AuthenticationRequest request) {
     return ResponseEntity.ok(service.authenticate(request));
   }
 
@@ -49,7 +51,8 @@ public class AuthController {
 
   @PutMapping("/{id}")
   public ResponseEntity<UserInfoResponse> updateUserInfo(@PathVariable UUID id,
-                                                         @RequestBody UpdateRequest request) {
+                                                         @Valid @RequestBody
+                                                         UpdateRequest request) {
     return ResponseEntity.ok(service.update(id, request));
   }
 
