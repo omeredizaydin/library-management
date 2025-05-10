@@ -2,16 +2,16 @@ package com.getir.lms.librarymanagement.controller;
 
 import com.getir.lms.librarymanagement.dto.AuthenticationResponse;
 import com.getir.lms.librarymanagement.dto.UpdateRequest;
+import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
 import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
 import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
-import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
 import com.getir.lms.librarymanagement.service.auth.AuthenticationService;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,16 +40,19 @@ public class AuthController {
   }
 
   @GetMapping("/me")
+  @PreAuthorize("hasAnyAuthority('PATRON', 'LIBRARIAN')")
   public ResponseEntity<UserInfoResponse> getUserInfo() {
     return ResponseEntity.ok(service.getUserInfo());
   }
 
   @GetMapping("/details")
+  @PreAuthorize("hasAuthority('LIBRARIAN')")
   public ResponseEntity<List<UserInfoResponse>> getAllUsers() {
     return ResponseEntity.ok(service.getAllUsers());
   }
 
   @PutMapping("/{id}")
+  @PreAuthorize("hasAuthority('LIBRARIAN')")
   public ResponseEntity<UserInfoResponse> updateUserInfo(@PathVariable UUID id,
                                                          @Valid @RequestBody
                                                          UpdateRequest request) {
@@ -57,6 +60,7 @@ public class AuthController {
   }
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasAuthority('LIBRARIAN')")
   public ResponseEntity<Object> delete(@PathVariable UUID id) {
     service.delete(id);
     return ResponseEntity.noContent().build();
