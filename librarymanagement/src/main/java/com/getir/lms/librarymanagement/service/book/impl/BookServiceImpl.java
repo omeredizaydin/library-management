@@ -4,11 +4,14 @@ import com.getir.lms.librarymanagement.common.exception.BookNotFoundException;
 import com.getir.lms.librarymanagement.dto.BookDto;
 import com.getir.lms.librarymanagement.model.entity.Book;
 import com.getir.lms.librarymanagement.repository.BookRepository;
+import com.getir.lms.librarymanagement.repository.UserRepository;
 import com.getir.lms.librarymanagement.service.book.BookService;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
   private final BookRepository bookRepository;
+  private final UserRepository userRepository;
 
   @Override
   public List<Book> getAllBooks() {
@@ -63,5 +67,10 @@ public class BookServiceImpl implements BookService {
   public void delete(UUID id) {
     log.debug("BookServiceImpl::delete Book is getting deleting with id: {}", id);
     bookRepository.deleteById(id);
+  }
+
+  @Override
+  public Page<Book> searchBooks(String searchTerm, Boolean availability, Pageable pageable) {
+    return bookRepository.searchBooks(searchTerm, pageable);
   }
 }
