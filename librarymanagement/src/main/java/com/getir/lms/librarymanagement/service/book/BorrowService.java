@@ -1,10 +1,15 @@
 package com.getir.lms.librarymanagement.service.book;
 
-import com.getir.lms.librarymanagement.model.entity.BorrowRecord;
+import com.getir.lms.librarymanagement.dto.BorrowRecordDto;
+import java.util.List;
 import java.util.UUID;
 
 public interface BorrowService {
-  BorrowRecord borrow(UUID id);
+  BorrowRecordDto borrow(UUID id);
 
-  BorrowRecord returnBook(UUID id);
+  BorrowRecordDto returnBook(UUID id);
+
+  List<BorrowRecordDto> borrowHistory();
+
+  List<BorrowRecordDto> borrowHistoryAllUsers();
 }
