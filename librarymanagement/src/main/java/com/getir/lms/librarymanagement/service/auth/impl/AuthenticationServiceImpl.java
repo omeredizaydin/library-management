@@ -4,9 +4,9 @@ import com.getir.lms.librarymanagement.common.exception.UserNotFoundException;
 import com.getir.lms.librarymanagement.config.JwtService;
 import com.getir.lms.librarymanagement.dto.AuthenticationResponse;
 import com.getir.lms.librarymanagement.dto.UpdateRequest;
+import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
 import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
 import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
-import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
 import com.getir.lms.librarymanagement.model.entity.User;
 import com.getir.lms.librarymanagement.model.enums.Role;
 import com.getir.lms.librarymanagement.model.transform.AuthenticationAssembler;
@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -61,8 +60,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
     var user = userRepository.findByEmail(request.getEmail())
-        .orElseThrow(() -> new UserNotFoundException(
-            String.format("User not found with email: %s", request.getEmail())));
+        .orElseThrow(
+            () -> new UserNotFoundException(String.format("with email: %s", request.getEmail())));
     var jwtToken = jwtService.generateToken(user);
     return AuthenticationResponse.builder()
         .token(jwtToken)
@@ -76,8 +75,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         "AuthenticationServiceImpl::getUserInfo user information with email: {} has been fetching.",
         email);
 
-    User user = userRepository.findByEmail(email).orElseThrow(
-        () -> new UserNotFoundException(String.format("User not found with email: %s", email)));
+    User user = userRepository.findByEmail(email)
+        .orElseThrow(() -> new UserNotFoundException(String.format("with email: %s", email)));
     return AuthenticationAssembler.toResponse(user);
   }
 
@@ -91,8 +90,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   @Override
   public UserInfoResponse update(UUID id, UpdateRequest request) {
     User user = userRepository.findById(id)
-        .orElseThrow(() -> new UserNotFoundException(
-            String.format("User not found with id: %s", id)));
+        .orElseThrow(() -> new UserNotFoundException(String.format("with id: %s", id)));
 
     log.debug("AuthenticationServiceImpl::update user with id {} has been fetched.", user.getId());
     user.setFirstName(request.getFirstName());

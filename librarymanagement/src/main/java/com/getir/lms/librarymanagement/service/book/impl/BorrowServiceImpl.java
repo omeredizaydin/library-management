@@ -1,5 +1,8 @@
 package com.getir.lms.librarymanagement.service.book.impl;
 
+import com.getir.lms.librarymanagement.common.exception.BookNotAvailableException;
+import com.getir.lms.librarymanagement.common.exception.BookNotFoundException;
+import com.getir.lms.librarymanagement.common.exception.BorrowRecordNotFound;
 import com.getir.lms.librarymanagement.common.exception.UserNotFoundException;
 import com.getir.lms.librarymanagement.model.entity.Book;
 import com.getir.lms.librarymanagement.model.entity.BorrowRecord;
@@ -28,7 +31,7 @@ public class BorrowServiceImpl implements BorrowService {
   @Transactional
   public BorrowRecord borrow(UUID id) {
     Book book = bookRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Book not found"));
+        .orElseThrow(() -> new BookNotFoundException(String.format("given id: %s", id)));
 
     checkAvailability(book);
 
@@ -50,9 +53,9 @@ public class BorrowServiceImpl implements BorrowService {
   public BorrowRecord returnBook(UUID id) {
     BorrowRecord borrowRecord =
         borrowRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Borrow record not found"));
+            .orElseThrow(() -> new BorrowRecordNotFound(String.format("given id: %s", id)));
 
-    if (borrowRecord.getIsReturned()) {
+    if (Boolean.TRUE.equals(borrowRecord.getIsReturned())) {
       throw new RuntimeException("Book is already returned");
     }
 
@@ -79,13 +82,15 @@ public class BorrowServiceImpl implements BorrowService {
 
   private static void checkAvailability(Book book) {
     if (book.getQuantity() <= 0 || !book.getIsAvailable()) {
-      throw new RuntimeException("Book is not available");
+      throw new BookNotAvailableException(
+          String.format("given id: %s with status: %s and quantity: %s", book.getId(),
+              book.getIsAvailable(), book.getQuantity()));
     }
   }
 
   private User getCurrentUser() {
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     return userRepository.findByEmail(email)
-        .orElseThrow(() -> new UserNotFoundException("User not found"));
+        .orElseThrow(() -> new UserNotFoundException(String.format("given email: %s", email)));
   }
 }

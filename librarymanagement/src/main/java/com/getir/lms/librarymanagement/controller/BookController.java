@@ -24,11 +24,13 @@ public class BookController {
   private final BookService bookService;
 
   @GetMapping("")
+  @PreAuthorize("hasAnyAuthority('PATRON', 'LIBRARIAN')")
   public ResponseEntity<List<Book>> getAllBooks() {
     return ResponseEntity.ok(bookService.getAllBooks());
   }
 
   @GetMapping("/{id}")
+  @PreAuthorize("hasAnyAuthority('PATRON', 'LIBRARIAN')")
   public ResponseEntity<Book> getBookById(@PathVariable("id") UUID id) {
     return ResponseEntity.ok(bookService.getBookById(id));
   }
@@ -40,11 +42,13 @@ public class BookController {
   }
 
   @PutMapping("/{id}")
+  @PreAuthorize("hasAuthority('LIBRARIAN')")
   public ResponseEntity<Book> update(@PathVariable("id") UUID id, @RequestBody BookDto dto) {
     return ResponseEntity.ok(bookService.update(id, dto));
   }
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasAuthority('LIBRARIAN')")
   public ResponseEntity<Book> update(@PathVariable("id") UUID id) {
     bookService.delete(id);
     return ResponseEntity.noContent().build();
