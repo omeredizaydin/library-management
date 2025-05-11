@@ -3,10 +3,12 @@ package com.getir.lms.librarymanagement.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import java.util.UUID;
 import lombok.Data;
 
 @Data
 public class BookDto {
+  private UUID id;
   @NotBlank(message = "Title is required")
   private String title;
   @NotBlank(message = "Author is required")

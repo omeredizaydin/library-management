@@ -4,15 +4,18 @@ import com.getir.lms.librarymanagement.common.exception.BookNotAvailableExceptio
 import com.getir.lms.librarymanagement.common.exception.BookNotFoundException;
 import com.getir.lms.librarymanagement.common.exception.BorrowRecordNotFound;
 import com.getir.lms.librarymanagement.common.exception.UserNotFoundException;
+import com.getir.lms.librarymanagement.dto.BorrowRecordDto;
 import com.getir.lms.librarymanagement.model.entity.Book;
 import com.getir.lms.librarymanagement.model.entity.BorrowRecord;
 import com.getir.lms.librarymanagement.model.entity.User;
+import com.getir.lms.librarymanagement.model.transform.BorrowRecordAssembler;
 import com.getir.lms.librarymanagement.repository.BookRepository;
 import com.getir.lms.librarymanagement.repository.BorrowRepository;
 import com.getir.lms.librarymanagement.repository.UserRepository;
 import com.getir.lms.librarymanagement.service.book.BorrowService;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +32,7 @@ public class BorrowServiceImpl implements BorrowService {
 
   @Override
   @Transactional
-  public BorrowRecord borrow(UUID id) {
+  public BorrowRecordDto borrow(UUID id) {
     Book book = bookRepository.findById(id)
         .orElseThrow(() -> new BookNotFoundException(String.format("given id: %s", id)));
 
@@ -45,12 +48,12 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     bookRepository.save(book);
-    return borrowRepository.save(borrowRecord);
+    return BorrowRecordAssembler.toDto(borrowRepository.save(borrowRecord));
   }
 
   @Override
   @Transactional
-  public BorrowRecord returnBook(UUID id) {
+  public BorrowRecordDto returnBook(UUID id) {
     BorrowRecord borrowRecord =
         borrowRepository.findById(id)
             .orElseThrow(() -> new BorrowRecordNotFound(String.format("given id: %s", id)));
@@ -67,7 +70,19 @@ public class BorrowServiceImpl implements BorrowService {
     borrowRecord.setReturnDate(LocalDate.now());
     borrowRecord.setIsReturned(true);
 
-    return borrowRepository.save(borrowRecord);
+    return BorrowRecordAssembler.toDto(borrowRepository.save(borrowRecord));
+  }
+
+  @Override
+  public List<BorrowRecordDto> borrowHistory() {
+    User user = getCurrentUser();
+    return borrowRepository.findAllByUserId(user.getId()).stream().map(BorrowRecordAssembler::toDto)
+        .toList();
+  }
+
+  @Override
+  public List<BorrowRecordDto> borrowHistoryAllUsers() {
+    return borrowRepository.findAll().stream().map(BorrowRecordAssembler::toDto).toList();
   }
 
   private static BorrowRecord createBorrowRecord(User user, Book book) {
