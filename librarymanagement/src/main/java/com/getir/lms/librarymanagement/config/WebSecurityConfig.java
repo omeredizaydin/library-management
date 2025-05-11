@@ -26,14 +26,9 @@ public class WebSecurityConfig {
     http
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth
-            // public endpoints
+            //public endpoints
             .requestMatchers("/api/v1/auth/register/**").permitAll()
             .requestMatchers("/api/v1/auth/authenticate/**").permitAll()
-            // private endpoints
-            //.requestMatchers(HttpMethod.PUT, "/api/v1/auth/**").hasAuthority(Role.LIBRARIAN.name())
-            //.requestMatchers(HttpMethod.DELETE, "/api/v1/auth/**").hasAuthority(Role.LIBRARIAN.name())
-            //.requestMatchers("/api/v1/auth/details/**").hasAuthority(Role.LIBRARIAN.name())
-
             .anyRequest()
             .authenticated())
         .sessionManagement(
@@ -41,9 +36,6 @@ public class WebSecurityConfig {
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-
     return http.build();
-
   }
-
 }
