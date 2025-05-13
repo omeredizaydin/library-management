@@ -42,7 +42,7 @@ docker-compose up
 ![image](https://github.com/user-attachments/assets/93fa4ba3-74cf-4371-ab49-ca83a59508d3)
 
 ## Database Design
-**I choose simplicity over complexity. I could have created tables for role,author,category, history so on and so forth. However, instead of making it full of table hell I chose to keep it simple as much as I can.**
+**I choose simplicity over complexity. I could have created tables for role,author, history so on and so forth. However, instead of making it full of table hell I chose to keep it simple as much as I can.**
 ![image](https://github.com/user-attachments/assets/08e021c3-ef9d-400d-8c3c-9b950741a338)
 
 ## If you cannot run the project with docker-compose up, you'd better check your db configuration in docker-compose.yaml file and edit it.
