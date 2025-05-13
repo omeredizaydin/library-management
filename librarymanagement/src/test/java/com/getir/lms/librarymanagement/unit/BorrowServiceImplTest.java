@@ -18,7 +18,7 @@ import com.getir.lms.librarymanagement.model.entity.User;
 import com.getir.lms.librarymanagement.repository.BookRepository;
 import com.getir.lms.librarymanagement.repository.BorrowRepository;
 import com.getir.lms.librarymanagement.repository.UserRepository;
-import com.getir.lms.librarymanagement.service.book.impl.BorrowServiceImpl;
+import com.getir.lms.librarymanagement.service.borrow.impl.BorrowServiceImpl;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

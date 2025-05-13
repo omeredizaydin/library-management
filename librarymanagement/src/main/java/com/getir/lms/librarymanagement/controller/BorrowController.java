@@ -1,7 +1,7 @@
 package com.getir.lms.librarymanagement.controller;
 
 import com.getir.lms.librarymanagement.dto.response.BorrowRecordDto;
-import com.getir.lms.librarymanagement.service.book.BorrowService;
+import com.getir.lms.librarymanagement.service.borrow.BorrowService;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;

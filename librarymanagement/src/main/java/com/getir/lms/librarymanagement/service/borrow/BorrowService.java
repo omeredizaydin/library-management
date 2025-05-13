@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.service.book;
+package com.getir.lms.librarymanagement.service.borrow;
 
 import com.getir.lms.librarymanagement.dto.response.BorrowRecordDto;
 import java.util.List;

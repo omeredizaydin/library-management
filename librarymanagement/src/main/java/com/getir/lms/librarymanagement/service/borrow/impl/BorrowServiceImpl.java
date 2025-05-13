@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.service.book.impl;
+package com.getir.lms.librarymanagement.service.borrow.impl;
 
 import com.getir.lms.librarymanagement.common.exception.BookNotAvailableException;
 import com.getir.lms.librarymanagement.common.exception.BookNotFoundException;
@@ -12,7 +12,7 @@ import com.getir.lms.librarymanagement.model.transform.BorrowRecordAssembler;
 import com.getir.lms.librarymanagement.repository.BookRepository;
 import com.getir.lms.librarymanagement.repository.BorrowRepository;
 import com.getir.lms.librarymanagement.repository.UserRepository;
-import com.getir.lms.librarymanagement.service.book.BorrowService;
+import com.getir.lms.librarymanagement.service.borrow.BorrowService;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
