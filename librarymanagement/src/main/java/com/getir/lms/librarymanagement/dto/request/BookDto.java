@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.dto;
+package com.getir.lms.librarymanagement.dto.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

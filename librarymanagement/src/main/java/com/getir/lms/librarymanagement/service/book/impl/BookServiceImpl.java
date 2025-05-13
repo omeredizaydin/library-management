@@ -1,7 +1,7 @@
 package com.getir.lms.librarymanagement.service.book.impl;
 
 import com.getir.lms.librarymanagement.common.exception.BookNotFoundException;
-import com.getir.lms.librarymanagement.dto.BookDto;
+import com.getir.lms.librarymanagement.dto.request.BookDto;
 import com.getir.lms.librarymanagement.model.entity.Book;
 import com.getir.lms.librarymanagement.repository.BookRepository;
 import com.getir.lms.librarymanagement.repository.UserRepository;

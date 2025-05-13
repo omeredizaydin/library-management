@@ -4,7 +4,7 @@ import com.getir.lms.librarymanagement.common.exception.BookNotAvailableExceptio
 import com.getir.lms.librarymanagement.common.exception.BookNotFoundException;
 import com.getir.lms.librarymanagement.common.exception.BorrowRecordNotFound;
 import com.getir.lms.librarymanagement.common.exception.UserNotFoundException;
-import com.getir.lms.librarymanagement.dto.BorrowRecordDto;
+import com.getir.lms.librarymanagement.dto.response.BorrowRecordDto;
 import com.getir.lms.librarymanagement.model.entity.Book;
 import com.getir.lms.librarymanagement.model.entity.BorrowRecord;
 import com.getir.lms.librarymanagement.model.entity.User;

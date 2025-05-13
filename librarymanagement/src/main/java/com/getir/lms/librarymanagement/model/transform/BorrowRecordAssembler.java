@@ -1,8 +1,8 @@
 package com.getir.lms.librarymanagement.model.transform;
 
-import com.getir.lms.librarymanagement.dto.BookDto;
-import com.getir.lms.librarymanagement.dto.BorrowRecordDto;
-import com.getir.lms.librarymanagement.dto.UserDto;
+import com.getir.lms.librarymanagement.dto.request.BookDto;
+import com.getir.lms.librarymanagement.dto.response.BorrowRecordDto;
+import com.getir.lms.librarymanagement.dto.response.UserDto;
 import com.getir.lms.librarymanagement.model.entity.Book;
 import com.getir.lms.librarymanagement.model.entity.BorrowRecord;
 import com.getir.lms.librarymanagement.model.entity.User;

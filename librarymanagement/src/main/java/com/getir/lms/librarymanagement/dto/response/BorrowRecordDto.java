@@ -1,5 +1,6 @@
-package com.getir.lms.librarymanagement.dto;
+package com.getir.lms.librarymanagement.dto.response;
 
+import com.getir.lms.librarymanagement.dto.request.BookDto;
 import java.time.LocalDate;
 import lombok.Data;
 

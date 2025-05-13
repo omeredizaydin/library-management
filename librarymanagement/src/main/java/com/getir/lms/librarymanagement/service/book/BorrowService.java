@@ -1,6 +1,6 @@
 package com.getir.lms.librarymanagement.service.book;
 
-import com.getir.lms.librarymanagement.dto.BorrowRecordDto;
+import com.getir.lms.librarymanagement.dto.response.BorrowRecordDto;
 import java.util.List;
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.config;
+package com.getir.lms.librarymanagement.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

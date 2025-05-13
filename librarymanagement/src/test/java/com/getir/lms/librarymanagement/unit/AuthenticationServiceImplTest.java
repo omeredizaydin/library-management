@@ -6,12 +6,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.getir.lms.librarymanagement.config.JwtService;
-import com.getir.lms.librarymanagement.dto.AuthenticationResponse;
-import com.getir.lms.librarymanagement.dto.UpdateRequest;
-import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
-import com.getir.lms.librarymanagement.dto.login.AuthenticationRequest;
-import com.getir.lms.librarymanagement.dto.register.RegisterRequest;
+import com.getir.lms.librarymanagement.security.JwtService;
+import com.getir.lms.librarymanagement.dto.response.AuthenticationResponse;
+import com.getir.lms.librarymanagement.dto.request.UpdateRequest;
+import com.getir.lms.librarymanagement.dto.response.UserInfoResponse;
+import com.getir.lms.librarymanagement.dto.request.AuthenticationRequest;
+import com.getir.lms.librarymanagement.dto.request.RegisterRequest;
 import com.getir.lms.librarymanagement.model.entity.User;
 import com.getir.lms.librarymanagement.model.enums.Role;
 import com.getir.lms.librarymanagement.repository.UserRepository;

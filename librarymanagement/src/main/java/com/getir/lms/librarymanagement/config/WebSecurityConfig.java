@@ -1,5 +1,6 @@
 package com.getir.lms.librarymanagement.config;
 
+import com.getir.lms.librarymanagement.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,8 @@ public class WebSecurityConfig {
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth
             //public endpoints
+            //.requestMatchers("/swagger-ui/**").permitAll()
+            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
             .requestMatchers("/api/v1/auth/register/**").permitAll()
             .requestMatchers("/api/v1/auth/authenticate/**").permitAll()
             .anyRequest()
