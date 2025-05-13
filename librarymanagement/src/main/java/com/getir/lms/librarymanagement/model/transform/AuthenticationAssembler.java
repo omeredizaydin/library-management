@@ -1,6 +1,6 @@
 package com.getir.lms.librarymanagement.model.transform;
 
-import com.getir.lms.librarymanagement.dto.info.UserInfoResponse;
+import com.getir.lms.librarymanagement.dto.response.UserInfoResponse;
 import com.getir.lms.librarymanagement.model.entity.User;
 import java.util.List;
 

@@ -17,5 +17,3 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-jwt:
-  secret: 753825833596c73052d101c78156f41575c4e7257f2147688542ffe506a9d69e

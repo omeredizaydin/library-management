@@ -1,6 +1,6 @@
 package com.getir.lms.librarymanagement.controller;
 
-import com.getir.lms.librarymanagement.dto.BookDto;
+import com.getir.lms.librarymanagement.dto.request.BookDto;
 import com.getir.lms.librarymanagement.model.entity.Book;
 import com.getir.lms.librarymanagement.service.book.BookService;
 import java.util.List;

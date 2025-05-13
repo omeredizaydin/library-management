@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.dto;
+package com.getir.lms.librarymanagement.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

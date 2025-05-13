@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.dto;
+package com.getir.lms.librarymanagement.dto.response;
 
 import java.util.UUID;
 import lombok.Data;

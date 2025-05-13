@@ -1,4 +1,4 @@
-package com.getir.lms.librarymanagement.config;
+package com.getir.lms.librarymanagement.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
