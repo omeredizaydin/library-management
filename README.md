@@ -4,12 +4,14 @@ Getir - Spring Boot- final case.
 Library Management System allows users(patron role) to list, search, get books with borrow, return and also view their history. Moreover, its librarians can operate crucial operations like adding books, deleting books and user as well as update user and books. Librarian can also view all users history and details.
 
 ## Technology Stack
--Java 21
--Spring 6.2.6
--Spring Boot 3.4.5
--PostgreSQL
--JUnit Mockito
--Docker
+
+- Java 21  
+- Spring 6.2.6  
+- Spring Boot 3.4.5  
+- PostgreSQL  
+- JUnit  
+- Mockito  
+- Docker
 
 ### To be able to run the application, just check docker-compose.yaml and make sure your PostgreSQL username, password and port match in file or not update it. After to do so,
 
